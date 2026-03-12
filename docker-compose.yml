@@ -1,0 +1,13 @@
+version: "3.9"
+services:
+  server:
+    build: { dockerfile: Dockerfile.server }
+    ports: ["8000:8000"]
+    environment:
+      DATABASE_URL: sqlite+aiosqlite:///./trmsg.db
+      SECRET_KEY: ${SECRET_KEY:-change-this}
+      GEMINI_API_KEY: ${GEMINI_API_KEY:-}
+    volumes: [uploads:/app/uploads]
+    restart: unless-stopped
+volumes:
+  uploads:

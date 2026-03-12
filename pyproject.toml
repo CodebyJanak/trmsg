@@ -1,0 +1,57 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "trmsg"
+version = "1.0.0"
+description = "Terminal messaging platform — chat, share files, play games, all from your CLI"
+readme = "README.md"
+license = { file = "LICENSE" }
+authors = [{ name = "trmsg Contributors" }]
+keywords = ["chat","terminal","cli","messaging","websocket","real-time","games","ai"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Console",
+    "Intended Audience :: End Users/Desktop",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Communications :: Chat",
+    "Topic :: Terminals",
+]
+requires-python = ">=3.10"
+dependencies = [
+    "click>=8.1.7",
+    "rich>=13.7.0",
+    "websockets>=12.0",
+    "httpx>=0.27.0",
+    "python-jose>=3.3.0",
+    "pydantic>=2.6.0",
+]
+
+[project.optional-dependencies]
+server = [
+    "fastapi>=0.110.0",
+    "uvicorn[standard]>=0.29.0",
+    "sqlalchemy[asyncio]>=2.0.28",
+    "aiosqlite>=0.20.0",
+    "bcrypt>=4.1.2",
+    "python-multipart>=0.0.9",
+    "pydantic-settings>=2.2.1",
+    "python-jose>=3.3.0",
+]
+
+[project.scripts]
+trmsg = "cli.main:main"
+trmsg-server = "server.main:run"
+
+[project.urls]
+Homepage = "https://github.com/yourusername/trmsg"
+Repository = "https://github.com/yourusername/trmsg"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["cli*", "server*"]
