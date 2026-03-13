@@ -192,6 +192,7 @@ class ChatUI:
             "/search-msg": self._cmd_search_msg,
             "/announce": self._cmd_announce,
             "/me": self._cmd_me,
+            "/ai": self._cmd_ai,
             "/clear": lambda p: self._do_clear(),
             "/help": lambda p: self._show_help(),
             "/?": lambda p: self._show_help(),
@@ -614,6 +615,20 @@ class ChatUI:
     async def _cmd_me(self, p):
         action = " ".join(p[1:]) if len(p) > 1 else "is here"
         await self.ws.send_message(self.current_room, f"_{self.username} {action}_")
+        self._scroll_offset = 0
+
+    async def _cmd_ai(self, p):
+        if len(p) < 2:
+            self._sys("Usage: /ai <question>")
+            self._sys("       /ai summarize")
+            self._sys("       /ai translate <language> <text>")
+            self._sys("       /ai explain <code>")
+            self._sys("       /ai roast [username]")
+            return
+        query = " ".join(p[1:])
+        self._sys(f"[dim]🤖 Asking AI: {query}[/dim]")
+        # Send as a chat message starting with /ai — server handles it
+        await self.ws.send_message(self.current_room, f"/ai {query}")
         self._scroll_offset = 0
 
     def _show_help(self):
