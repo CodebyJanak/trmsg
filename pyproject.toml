@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "trmsg"
-version = "1.0.2"
+version = "1.0.3"
 description = "Terminal messaging platform — chat, share files, play games, all from your CLI"
 readme = "README.md"
 license = { file = "LICENSE" }
