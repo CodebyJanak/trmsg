@@ -198,7 +198,11 @@ class ChatUI:
         }
         handler = cmds.get(c)
         if handler:
-            await handler(parts)
+            import asyncio, inspect
+            result = handler(parts)
+            # If the handler returned a coroutine, await it
+            if inspect.isawaitable(result):
+                await result
         else:
             self._sys(f"[red]Unknown:[/red] {c}  —  type [bold]/help[/bold]")
 

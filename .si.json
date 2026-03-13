@@ -5,6 +5,10 @@
     ".toml": {
       "enabled": false,
       "run": "taplo lsp stdio"
+    },
+    ".py": {
+      "enabled": false,
+      "run": "pylsp"
     }
   }
 }
